@@ -1,0 +1,18 @@
+{
+  "appTitle": "Next Шаблон",
+  "seoTitle": "Next Шаблон — Next.js шаблон с MUI и TypeScript",
+  "seoDescription": "Готовый стартовый шаблон Next.js с Material UI, интернационализацией и поддержкой тем оформления. Пропустите настройку и начните разрабатывать.",
+  "seoKeywords": "Next.js, React, MUI, Material UI, TypeScript, шаблон",
+  "home": "Главная",
+  "heroTitle": "Создавайте быстрее с Next.js",
+  "heroSubtitle": "Готовый шаблон с MUI, интернационализацией и темами. Пропустите шаблонный код и начните разработку.",
+  "getStarted": "Начать",
+  "viewOnGithub": "GitHub",
+  "goBack": "Назад",
+  "toggleTheme": "Переключить тему",
+  "language": "Язык",
+  "english": "Английский",
+  "armenian": "Армянский",
+  "demoTitle": "Интерактивная демонстрация",
+  "russian": "Русский"
+}

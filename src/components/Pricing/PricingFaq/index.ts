@@ -1,0 +1,1 @@
+export { PricingFaq } from "./PricingFaq";

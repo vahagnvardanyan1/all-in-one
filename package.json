@@ -1,0 +1,49 @@
+{
+  "name": "next-template",
+  "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vahagnvardanyan1/next-template"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "next-sitemap --config next-sitemap.config.mjs",
+    "start": "next start",
+    "lint": "eslint 'src/**/*.{js,ts,tsx,jsx}' --quiet",
+    "lint-fix": "eslint 'src/**/*.{js,ts,tsx,jsx}' --quiet --fix",
+    "lint-ci": "eslint 'src/**/*.{js,ts,tsx,jsx}' -f json -o eslint-report.json"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource/roboto": "^5.2.9",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
+    "@mui/material-nextjs": "^7.3.7",
+    "@xyflow/react": "^12.10.1",
+    "framer-motion": "^12.34.3",
+    "next": "16.1.6",
+    "next-intl": "^4.8.2",
+    "next-sitemap": "^4.2.3",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "use-sync-external-store": "^1.6.0",
+    "zustand": "^5.0.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@typescript-eslint/parser": "^8.55.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1",
+    "typescript": "^5"
+  }
+}

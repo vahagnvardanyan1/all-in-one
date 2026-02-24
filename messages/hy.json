@@ -1,0 +1,18 @@
+{
+  "appTitle": "Next Կաղապար",
+  "seoTitle": "Next Կաղապար — Next.js կաղապար MUI-ով և TypeScript-ով",
+  "seoDescription": "Արտադրական Next.js կաղապար Material UI-ով, միջազգայնացման և թեմաների աջակցությամբ։ Բաց թողեք կաղապարը և սկսեք ստեղծել արդիական վեբ հավելվածներ։",
+  "seoKeywords": "Next.js, React, MUI, Material UI, TypeScript",
+  "home": "Գլխավոր",
+  "heroTitle": "Ստեղծեք ավելի արագ Next.js-ով",
+  "heroSubtitle": "Արտադրական նախագիծ MUI-ով, միջազգայնացման և թեմաներով։ Բաց թողեք կաղապարը և սկսեք ստեղծել։",
+  "getStarted": "Սկսեք",
+  "viewOnGithub": "GitHub",
+  "goBack": "Հետ գնալ",
+  "toggleTheme": "Փոխել թեման",
+  "language": "Լեզու",
+  "english": "Անգլերեն",
+  "armenian": "Հայերեն",
+  "demoTitle": "Ինտերակտիվ ցուցադրում",
+  "russian": "Ռուսերեն"
+}

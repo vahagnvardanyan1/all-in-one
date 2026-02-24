@@ -1,0 +1,18 @@
+{
+  "appTitle": "Next Template",
+  "seoTitle": "Next Template — Next.js Starter with MUI and TypeScript",
+  "seoDescription": "A production-ready Next.js starter template with Material UI, internationalization, and theming. Skip the boilerplate and start building modern web apps.",
+  "seoKeywords": "Next.js, React, MUI, Material UI, TypeScript, starter template",
+  "home": "Home",
+  "heroTitle": "Build Faster with Next.js",
+  "heroSubtitle": "A production-ready starter template with MUI, internationalization, and theming built in. Skip the boilerplate and start building.",
+  "getStarted": "Get Started",
+  "viewOnGithub": "GitHub",
+  "goBack": "Go back",
+  "toggleTheme": "Toggle light/dark mode",
+  "language": "Language",
+  "english": "English",
+  "armenian": "Armenian",
+  "demoTitle": "Interactive Demo",
+  "russian": "Russian"
+}

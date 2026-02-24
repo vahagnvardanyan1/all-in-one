@@ -1,0 +1,5 @@
+[    1091ms] [ERROR] Received `%s` for a non-boolean attribute `%s`.
+
+If you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.
+
+If you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead. false highlighted highlighted false highlighted highlighted highlighted @ http://localhost:3000/_next/static/chunks/a40c7_next_dist_52d595d7._.js:3127
