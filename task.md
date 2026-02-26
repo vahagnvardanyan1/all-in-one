@@ -144,3 +144,9 @@ Focus on beautiful UI and structure.
 Write clean, modular, production-style code.
 
 Generate full project structure and main files.
+
+-----------------------------------
+AI ACADEMY (Education Hub)
+-----------------------------------
+
+lets add some another minds like create it academy when user want to learn software engineering he can go here and start lesson he can see teacher, another students .etc so fake ai academy, lets add that in sidebar should be education tab .etc please start doing it and also reminder this is mockup nothing else

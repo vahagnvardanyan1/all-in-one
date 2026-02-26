@@ -7,6 +7,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SchoolIcon from "@mui/icons-material/School";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -37,6 +38,7 @@ const NAV_ITEMS = [
   { label: "AI Marketplace", icon: SmartToyIcon, href: "/marketplace" },
   { label: "AI Companies", icon: BusinessIcon, href: "/companies" },
   { label: "AI Builder", icon: AccountTreeIcon, href: "/builder" },
+  { label: "Education", icon: SchoolIcon, href: "/education" },
   { label: "Dashboard", icon: DashboardIcon, href: "/dashboard" },
   { label: "Pricing", icon: PaymentsIcon, href: "/pricing" },
 ] as const;
