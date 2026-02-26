@@ -11,6 +11,7 @@ export interface IPersonality {
   features: string[];
   tags: string[];
   isPopular: boolean;
+  mockResponses: string[];
 }
 
 export type PersonalityCategory =
@@ -49,6 +50,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["habits", "routines", "mindfulness", "productivity"],
     isPopular: true,
+    mockResponses: [
+      "Let's start by identifying your top 3 goals for this week. What matters most to you right now?",
+      "I noticed you mentioned morning routines — have you tried the 2-minute rule? Start with just 2 minutes of any habit.",
+      "Great progress! You've been consistent for 5 days. That's when habits start to stick.",
+      "Let's do a quick reflection: what went well this week, and what felt challenging?",
+      "I recommend stacking your new habit onto something you already do daily. What's your most automatic daily routine?",
+      "Remember, progress isn't linear. A missed day doesn't erase your streak — just pick up where you left off.",
+    ],
   },
   {
     id: "pg-002",
@@ -69,6 +78,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["journaling", "self-reflection", "creativity", "writing"],
     isPopular: false,
+    mockResponses: [
+      "Let's start with a warm-up prompt: describe one moment today that made you pause, even briefly.",
+      "I see a pattern forming in your entries — you often feel most creative in the evenings. Have you noticed that?",
+      "Try this: write for 5 minutes without stopping. Don't edit, just let thoughts flow onto the page.",
+      "Your last entry had a powerful insight about self-doubt. Would you like to explore that thread deeper?",
+      "Let's celebrate: you've journaled 10 days in a row! What has surprised you most about this practice?",
+      "Here's a reframing exercise: take that challenge you wrote about and list three hidden opportunities within it.",
+    ],
   },
   {
     id: "pg-003",
@@ -90,6 +107,15 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["goals", "accountability", "coaching", "transformation"],
     isPopular: false,
+    mockResponses: [
+      "Let's define your #1 objective for this quarter. What would make the biggest impact on your life?",
+      "I'll check in with you every 3 days. How do you prefer accountability — gentle nudges or direct challenges?",
+      "Your progress on your key results is at 60%. Let's identify what's blocking the last 40%.",
+      "Time for a milestone review! You've completed 3 of 5 key results. That's worth celebrating.",
+      "I've noticed you're most productive on Tuesdays and Wednesdays. Want to schedule your deep work then?",
+      "Let's create your vision board: describe your ideal life one year from now in vivid detail.",
+      "What's one small win you can achieve today that moves you closer to your quarterly goal?",
+    ],
   },
   {
     id: "pg-004",
@@ -110,6 +136,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["philosophy", "wisdom", "stoicism", "intentional-living"],
     isPopular: true,
+    mockResponses: [
+      "Marcus Aurelius wrote: 'The happiness of your life depends upon the quality of your thoughts.' What's occupying your mind today?",
+      "Here's today's reflection: what is one thing within your control that you've been treating as if it isn't?",
+      "The Stoics practiced 'premeditatio malorum' — imagining challenges beforehand. What's your biggest upcoming challenge?",
+      "Consider this: the obstacle isn't blocking your path — it IS the path. How might your current struggle be teaching you?",
+      "Let's practice negative visualization: imagine losing something you take for granted. How does that shift your gratitude?",
+      "Today's reading recommendation: Seneca's 'On the Shortness of Life.' It's a powerful reminder about intentional time use.",
+    ],
   },
 
   // --- Fitness ---
@@ -133,6 +167,15 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["strength", "weightlifting", "gym", "muscle-building"],
     isPopular: true,
+    mockResponses: [
+      "Let's assess your current training level. How many days per week are you lifting, and what's your split?",
+      "Based on your numbers, I recommend increasing your squat volume by 10% this week. Progressive overload is key.",
+      "Time for a deload week! Your CNS needs recovery. Drop to 60% of your working weights for 5 days.",
+      "Your bench press has plateaued. Let's add paused reps and close-grip variations to break through.",
+      "Great lift today! You hit a new PR on deadlifts. Recovery is crucial now — prioritize sleep and protein.",
+      "I've updated your program: we're switching to an upper/lower split for the next 6 weeks. Ready?",
+      "Remember: form before weight, always. A controlled rep builds more muscle than a sloppy heavy one.",
+    ],
   },
   {
     id: "ft-002",
@@ -153,6 +196,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["yoga", "mobility", "flexibility", "breathwork"],
     isPopular: false,
+    mockResponses: [
+      "Let's begin with a body scan. Close your eyes and notice where you're holding tension right now.",
+      "Your hip flexibility has improved 15% this month! Let's add pigeon pose variations to keep the momentum.",
+      "Today's flow focuses on spinal mobility. These 8 poses take just 12 minutes — perfect for a work break.",
+      "Try box breathing before we start: 4 seconds in, 4 hold, 4 out, 4 hold. It calms the nervous system.",
+      "I've noticed you skip cool-down stretches. Those last 5 minutes are where the real flexibility gains happen.",
+      "Your balance is improving! Let's challenge it with tree pose and warrior III transitions today.",
+    ],
   },
   {
     id: "ft-003",
@@ -173,6 +224,15 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["nutrition", "meal-planning", "macros", "diet"],
     isPopular: false,
+    mockResponses: [
+      "Let's start with your goals: are you focused on muscle gain, fat loss, or general health optimization?",
+      "Based on your activity level, I recommend 2,400 calories with a 40/30/30 protein/carb/fat split.",
+      "Here's your grocery list for the week. I've prioritized high-protein, budget-friendly options.",
+      "Meal prep tip: cook your proteins in bulk on Sunday. It saves 3+ hours during the week.",
+      "Your protein intake has been consistently low. Try adding a Greek yogurt snack between lunch and dinner.",
+      "I've adjusted your macros for tomorrow's high-intensity training day — extra carbs pre-workout.",
+      "Hydration check: aim for at least 3 liters today. Your workout performance depends on it.",
+    ],
   },
   {
     id: "ft-004",
@@ -193,6 +253,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["running", "cardio", "marathon", "endurance"],
     isPopular: false,
+    mockResponses: [
+      "What's your current weekly mileage? I'll build a plan that increases volume safely — no more than 10% per week.",
+      "Today's workout: 6x800m intervals at your 5K pace with 90-second recovery jogs between sets.",
+      "Your heart rate data shows you're running too fast on easy days. Slow down to stay in Zone 2.",
+      "Race week nutrition: start carb-loading 3 days before. I've prepared a meal plan for you.",
+      "Your cadence is averaging 160 steps/min. Let's work toward 170-180 for better running economy.",
+      "Great long run! Recovery protocol: foam roll, stretch, refuel within 30 minutes with a 3:1 carb-to-protein ratio.",
+    ],
   },
 
   // --- Education ---
@@ -216,6 +284,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["languages", "learning", "conversation", "fluency"],
     isPopular: true,
+    mockResponses: [
+      "Which language are you learning? I support 30+ languages and will adapt to your current proficiency.",
+      "Let's practice with a real-world scenario: you're ordering food at a restaurant. How would you ask for the menu?",
+      "Good attempt! Small correction: the verb conjugation should be in the formal form when speaking to strangers.",
+      "Your vocabulary retention is at 78% this week. Let's review the 15 words you missed with spaced repetition.",
+      "Cultural tip: in that language, it's common to greet people differently depending on the time of day.",
+      "You've hit a 30-day streak! Your fluency score jumped from B1 to B2 level. Impressive progress!",
+    ],
   },
   {
     id: "ed-002",
@@ -236,6 +312,15 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["programming", "coding", "projects", "portfolio"],
     isPopular: true,
+    mockResponses: [
+      "Welcome! Let's start with a project. What excites you more: building a web app, a CLI tool, or a game?",
+      "I reviewed your code. The logic is solid, but consider extracting that repeated block into a reusable function.",
+      "Great question! Think of a variable like a labeled box — it stores a value you can reference later by name.",
+      "Time for a challenge: refactor this function to use array methods instead of a for loop. I'll review it after.",
+      "Your portfolio now has 3 projects! Let's add a README to each one — it makes a huge difference for recruiters.",
+      "Debugging tip: when something breaks, read the error message first. It usually tells you exactly which line failed.",
+      "You've graduated from beginner to intermediate! Let's tackle data structures next — starting with linked lists.",
+    ],
   },
   {
     id: "ed-003",
@@ -256,6 +341,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["history", "storytelling", "education", "interactive"],
     isPopular: false,
+    mockResponses: [
+      "Pick an era: Ancient Rome, Medieval Europe, Renaissance, or the Industrial Revolution. Where shall we begin?",
+      "Imagine you're a merchant in 15th-century Florence. The Medici bank just collapsed. What do you do?",
+      "Interesting perspective! Now consider how a peasant would have experienced the same event differently.",
+      "Pop quiz: which event came first — the fall of Constantinople or Gutenberg's printing press? They're closer than you think!",
+      "Let's connect history to today: the debates about AI regulation mirror the Luddite movement of the 1800s.",
+      "Your retention score is 85%! You've mastered the Renaissance timeline. Ready for the Age of Exploration?",
+    ],
   },
   {
     id: "ed-004",
@@ -277,6 +370,15 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["math", "calculus", "algebra", "tutoring"],
     isPopular: false,
+    mockResponses: [
+      "What math topic are you working on? I can adapt my explanations to visual, step-by-step, or real-world styles.",
+      "Think of derivatives as measuring speed — how fast something changes at any given moment. Make sense?",
+      "Let me walk you through this step by step. First, identify what's being asked, then list what you know.",
+      "Almost there! You made a sign error in step 3. The negative times a negative gives a positive. Try again!",
+      "Practice problem: if a ball is thrown upward at 20 m/s, when does it reach its highest point? Use calculus!",
+      "You've mastered quadratics! Your accuracy jumped from 60% to 92% in two weeks. Ready for trigonometry?",
+      "Exam prep mode: I've generated 20 problems covering all topics from this chapter. Let's time it at 45 minutes.",
+    ],
   },
 
   // --- Emotional ---
@@ -299,6 +401,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["mental-health", "CBT", "emotional-wellness", "coping"],
     isPopular: false,
+    mockResponses: [
+      "How are you feeling right now? There's no right or wrong answer — just describe what's present for you.",
+      "I hear you. Let's try a CBT technique: what's the thought behind that feeling? And what evidence supports or challenges it?",
+      "That sounds like a cognitive distortion called 'catastrophizing.' Let's examine the most realistic outcome instead.",
+      "Your mood tracker shows improvement over the past week. Small steps count — you're building resilience.",
+      "Let's add a coping tool to your toolkit: the 5-4-3-2-1 grounding technique. Name 5 things you can see right now.",
+      "Remember, seeking support is a sign of strength, not weakness. You're doing important work here.",
+    ],
   },
   {
     id: "em-002",
@@ -319,6 +429,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["meditation", "sleep", "relaxation", "mindfulness"],
     isPopular: false,
+    mockResponses: [
+      "Let's start tonight's wind-down. First, put away screens and dim the lights. Ready for a guided session?",
+      "Tonight's sleep story takes place in a quiet forest cabin during a gentle snowfall. Close your eyes...",
+      "Your sleep data shows you're waking up around 3 AM consistently. Let's adjust your evening routine to help.",
+      "Try this breathing pattern before bed: inhale for 4 counts, hold for 7, exhale for 8. It activates your rest response.",
+      "Your average sleep quality improved 18% this month. The consistent bedtime is making a real difference.",
+      "Let's try a body scan meditation. Starting from your toes, slowly release tension in each muscle group.",
+    ],
   },
   {
     id: "em-003",
@@ -345,6 +463,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
       "conflict-resolution",
     ],
     isPopular: false,
+    mockResponses: [
+      "Tell me about a recent conversation that didn't go as you hoped. What felt off about it?",
+      "Let's practice 'I statements': instead of 'You never listen,' try 'I feel unheard when...' See the difference?",
+      "Based on your responses, your attachment style leans toward anxious. This isn't bad — it just means you value closeness deeply.",
+      "Conflict resolution tip: before responding in anger, try the 24-hour rule. Sleep on it, then respond with clarity.",
+      "Let's rehearse that difficult conversation. I'll play the other person. Start by sharing your main concern.",
+      "Your communication pattern shows growth! You're using more empathetic language than when we first started.",
+    ],
   },
   {
     id: "em-004",
@@ -365,6 +491,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["grief", "transitions", "support", "healing"],
     isPopular: false,
+    mockResponses: [
+      "I'm here whenever you're ready to talk. There's no timeline for grief — take all the time you need.",
+      "Would you like to share a favorite memory? Sometimes honoring what we've lost helps us process the pain.",
+      "It's okay to feel multiple emotions at once. Grief and gratitude can coexist — both are valid.",
+      "Let's try a narrative exercise: write a letter to your future self about what this experience is teaching you.",
+      "Transitions are hard because they involve both loss and possibility. What small thing feels hopeful today?",
+      "You've shown incredible courage in sharing that. Remember, healing isn't forgetting — it's learning to carry it differently.",
+    ],
   },
 
   // --- Professional ---
@@ -388,6 +522,15 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["career", "strategy", "branding", "interviews"],
     isPopular: false,
+    mockResponses: [
+      "Let's map your career trajectory. Where are you now, and where do you want to be in 3 years?",
+      "Your LinkedIn profile needs optimization. I'd recommend leading with impact metrics, not just job titles.",
+      "Interview prep: tell me about a time you led a project through ambiguity. Let's craft your STAR response.",
+      "The market data shows a 15% salary increase for your role this year. You have strong leverage for negotiation.",
+      "Your personal brand should answer one question: what unique value do you bring that nobody else does?",
+      "I've analyzed 50 job postings in your target role. The top 3 skills mentioned are leadership, data analysis, and cross-functional collaboration.",
+      "Networking strategy: reach out to 3 people per week in your target industry. Quality connections compound over time.",
+    ],
   },
   {
     id: "pr-002",
@@ -408,6 +551,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["public-speaking", "presentations", "communication", "confidence"],
     isPopular: false,
+    mockResponses: [
+      "Let's start with your upcoming presentation. What's your main message in one sentence?",
+      "The rule of three is powerful: structure your talk around 3 key points. Audiences remember triads best.",
+      "Your pacing is a bit fast. Try pausing for 2 seconds after each key point — silence is a powerful tool.",
+      "Great opening! But skip the 'Today I'm going to talk about...' Instead, start with a story or bold question.",
+      "Practice drill: deliver your 60-second elevator pitch right now. I'll give feedback on clarity and confidence.",
+      "Your vocal variety has improved dramatically! The pitch changes and strategic pauses make you much more engaging.",
+    ],
   },
   {
     id: "pr-003",
@@ -428,6 +579,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["leadership", "management", "team-building", "decision-making"],
     isPopular: false,
+    mockResponses: [
+      "Describe a recent leadership challenge you faced. I'll help you analyze it through multiple frameworks.",
+      "Scenario: two team members are in conflict and productivity is dropping. Walk me through your approach.",
+      "The best leaders ask more than they tell. Try replacing 'Here's what to do' with 'What do you think we should do?'",
+      "Your decision-making style tends toward consensus-building. That's a strength — but sometimes decisive action is needed faster.",
+      "Feedback framework: try SBI — Situation, Behavior, Impact. It keeps feedback specific and non-personal.",
+      "Let's work on your leadership presence. Before your next meeting, set one intention: listen more than you speak.",
+    ],
   },
   {
     id: "pr-004",
@@ -449,5 +608,14 @@ export const AI_PERSONALITIES: IPersonality[] = [
     ],
     tags: ["sales", "negotiation", "closing", "pipeline"],
     isPopular: false,
+    mockResponses: [
+      "Let's role-play a sales call. I'm a skeptical prospect with budget concerns. Pitch me your product.",
+      "Good approach, but you jumped to features too fast. Start by understanding MY problem first — ask discovery questions.",
+      "Objection: 'Your price is too high.' How do you respond? Hint: don't discount — reframe the value.",
+      "Your pipeline has 12 deals in stage 3. Let's prioritize: which 3 have the highest probability of closing this month?",
+      "Consultative selling tip: the best salespeople spend 70% of the call listening and only 30% talking.",
+      "Deal review: that prospect went silent after your proposal. Send a value-add follow-up, not a 'just checking in' email.",
+      "You closed 4 deals this week! Let's analyze what worked so you can replicate the pattern.",
+    ],
   },
 ];

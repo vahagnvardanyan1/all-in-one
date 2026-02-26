@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import SendIcon from "@mui/icons-material/Send";
@@ -17,31 +17,19 @@ import Typography from "@mui/material/Typography";
 import { motion } from "framer-motion";
 
 import type { IPersonality } from "@/data/personalities";
+import { useChat } from "@/hooks/useChat";
 
 import {
   ChatContainer,
   ChatMessages,
   MessageBubble,
   ChatInputBar,
+  TypingIndicator,
 } from "./styled";
 
 interface ProfileTabsProps {
   personality: IPersonality;
 }
-
-const buildMockMessages = ({ name }: { name: string }) => [
-  { isUser: false, text: `Hi! I'm ${name}. How can I help you today?` },
-  { isUser: true, text: "I'd love to know more about what you can do." },
-  {
-    isUser: false,
-    text: "I specialize in helping people achieve their goals through personalized guidance. I can adapt to your learning style and pace.",
-  },
-  { isUser: true, text: "That sounds great! Can we start now?" },
-  {
-    isUser: false,
-    text: "Absolutely! Let's begin by understanding your current goals and what you'd like to accomplish. Tell me a bit about yourself.",
-  },
-];
 
 const tabSx = {
   color: "text.secondary",
@@ -51,12 +39,30 @@ const tabSx = {
 
 export const ProfileTabs = ({ personality }: ProfileTabsProps) => {
   const [tab, setTab] = useState(0);
+  const [input, setInput] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { messages, sendMessage, isTyping } = useChat(personality.id);
 
   const handleTabChange = (_: React.SyntheticEvent, value: number) => {
     setTab(value);
   };
 
-  const mockMessages = buildMockMessages({ name: personality.name });
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
+
+  const handleSend = () => {
+    if (!input.trim() || isTyping) return;
+    sendMessage(input);
+    setInput("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
 
   return (
     <motion.div
@@ -119,17 +125,28 @@ export const ProfileTabs = ({ personality }: ProfileTabsProps) => {
           {tab === 2 && (
             <ChatContainer>
               <ChatMessages>
-                {mockMessages.map((msg, index) => (
-                  <MessageBubble key={index} isUser={msg.isUser}>
+                {messages.map((msg) => (
+                  <MessageBubble key={msg.id} isUser={msg.isUser}>
                     {msg.text}
                   </MessageBubble>
                 ))}
+                {isTyping && (
+                  <TypingIndicator>
+                    <span />
+                    <span />
+                    <span />
+                  </TypingIndicator>
+                )}
+                <div ref={messagesEndRef} />
               </ChatMessages>
               <ChatInputBar>
                 <TextField
                   fullWidth
                   placeholder="Type a message..."
                   size="small"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   sx={(t) => ({
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
@@ -145,6 +162,8 @@ export const ProfileTabs = ({ personality }: ProfileTabsProps) => {
                   })}
                 />
                 <IconButton
+                  onClick={handleSend}
+                  disabled={!input.trim() || isTyping}
                   sx={{
                     background:
                       "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
@@ -152,6 +171,10 @@ export const ProfileTabs = ({ personality }: ProfileTabsProps) => {
                     "&:hover": {
                       background:
                         "linear-gradient(135deg, #6d28d9 0%, #2563eb 100%)",
+                    },
+                    "&.Mui-disabled": {
+                      background: "rgba(124, 58, 237, 0.3)",
+                      color: "rgba(255, 255, 255, 0.4)",
                     },
                   }}
                 >

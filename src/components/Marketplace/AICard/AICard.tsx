@@ -1,5 +1,6 @@
 "use client";
 
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
@@ -15,17 +16,29 @@ import {
   PopularChip,
   PriceText,
   SubscribeButton,
+  SubscribedButton,
   DemoChatButton,
 } from "./styled";
 
 interface AICardProps {
   personality: IPersonality;
   onDemoChat: (id: string) => void;
+  isSubscribed: boolean;
+  onSubscribe: (id: string) => void;
 }
 
-export const AICard = ({ personality, onDemoChat }: AICardProps) => {
+export const AICard = ({
+  personality,
+  onDemoChat,
+  isSubscribed,
+  onSubscribe,
+}: AICardProps) => {
   const handleDemoChat = () => {
     onDemoChat(personality.id);
+  };
+
+  const handleSubscribe = () => {
+    onSubscribe(personality.id);
   };
 
   return (
@@ -87,9 +100,23 @@ export const AICard = ({ personality, onDemoChat }: AICardProps) => {
         </PriceText>
 
         <Stack direction="row" spacing={1.5}>
-          <SubscribeButton variant="contained" size="small">
-            Subscribe
-          </SubscribeButton>
+          {isSubscribed ? (
+            <SubscribedButton
+              variant="contained"
+              size="small"
+              startIcon={<CheckCircleIcon />}
+            >
+              Subscribed
+            </SubscribedButton>
+          ) : (
+            <SubscribeButton
+              variant="contained"
+              size="small"
+              onClick={handleSubscribe}
+            >
+              Subscribe
+            </SubscribeButton>
+          )}
           <DemoChatButton
             variant="outlined"
             size="small"

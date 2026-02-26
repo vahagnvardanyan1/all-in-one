@@ -1,11 +1,14 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
+
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import Dialog from "@mui/material/Dialog";
 import Typography from "@mui/material/Typography";
 
 import type { IPersonality } from "@/data/personalities";
+import { useChat } from "@/hooks/useChat";
 
 import {
   ModalTitle,
@@ -16,6 +19,7 @@ import {
   InputArea,
   ChatInput,
   SendButton,
+  TypingIndicator,
 } from "./styled";
 
 interface ChatModalProps {
@@ -24,24 +28,31 @@ interface ChatModalProps {
   personality: IPersonality | null;
 }
 
-const getMockMessages = (name: string) => [
-  { isUser: false, text: `Hi there! I'm ${name}. How can I help you today?` },
-  { isUser: true, text: "Hey! I'd love to learn more about what you can do." },
-  {
-    isUser: false,
-    text: "Great question! I specialize in providing personalized guidance and support. I can help you set goals, track progress, and provide insights tailored to your needs.",
-  },
-  { isUser: true, text: "That sounds amazing. Can we start right away?" },
-  {
-    isUser: false,
-    text: "Absolutely! Subscribe to unlock our full sessions. This demo gives you a taste of what we can achieve together.",
-  },
-];
-
 export const ChatModal = ({ open, onClose, personality }: ChatModalProps) => {
+  const [input, setInput] = useState("");
+  const messagesRef = useRef<HTMLDivElement>(null);
+  const { messages, sendMessage, isTyping } = useChat(personality?.id ?? "");
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages, isTyping]);
+
   if (!personality) return null;
 
-  const messages = getMockMessages(personality.name);
+  const handleSend = () => {
+    if (!input.trim() || isTyping) return;
+    sendMessage(input);
+    setInput("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
 
   return (
     <Dialog
@@ -70,12 +81,19 @@ export const ChatModal = ({ open, onClose, personality }: ChatModalProps) => {
         </CloseButton>
       </ModalTitle>
 
-      <MessagesArea>
-        {messages.map((msg, idx) => (
-          <MessageBubble key={idx} isUser={msg.isUser}>
+      <MessagesArea ref={messagesRef}>
+        {messages.map((msg) => (
+          <MessageBubble key={msg.id} isUser={msg.isUser}>
             {msg.text}
           </MessageBubble>
         ))}
+        {isTyping && (
+          <TypingIndicator>
+            <span />
+            <span />
+            <span />
+          </TypingIndicator>
+        )}
       </MessagesArea>
 
       <InputArea>
@@ -83,8 +101,15 @@ export const ChatModal = ({ open, onClose, personality }: ChatModalProps) => {
           placeholder="Type a message..."
           size="small"
           variant="outlined"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
-        <SendButton size="small">
+        <SendButton
+          size="small"
+          onClick={handleSend}
+          disabled={!input.trim() || isTyping}
+        >
           <SendIcon fontSize="small" />
         </SendButton>
       </InputArea>

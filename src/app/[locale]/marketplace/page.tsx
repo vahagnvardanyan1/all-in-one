@@ -13,19 +13,26 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { motion } from "framer-motion";
 
-import { AICard, ChatModal } from "@/components/Marketplace";
+import { AICard, ChatModal, SubscribeModal } from "@/components/Marketplace";
 import { AI_PERSONALITIES, PERSONALITY_CATEGORIES } from "@/data/personalities";
 import type { IPersonality } from "@/data/personalities";
+import { useAppStore, setAppStore } from "@/store";
+import type { IAppStore } from "@/store";
 
 const ALL_TAB = "All";
 const CATEGORY_TABS = [ALL_TAB, ...PERSONALITY_CATEGORIES];
+
+const subscribedSelector = (s: IAppStore) => s.subscribedIds;
 
 const MarketplacePage = () => {
   const [selectedCategory, setSelectedCategory] = useState(ALL_TAB);
   const [searchQuery, setSearchQuery] = useState("");
   const [chatModalOpen, setChatModalOpen] = useState(false);
+  const [subscribeModalOpen, setSubscribeModalOpen] = useState(false);
   const [selectedPersonality, setSelectedPersonality] =
     useState<IPersonality | null>(null);
+
+  const subscribedIds = useAppStore(subscribedSelector);
 
   const filteredPersonalities = useMemo(() => {
     const query = searchQuery.toLowerCase();
@@ -51,6 +58,24 @@ const MarketplacePage = () => {
 
   const handleCloseChat = () => {
     setChatModalOpen(false);
+  };
+
+  const handleSubscribeClick = (id: string) => {
+    const personality = AI_PERSONALITIES.find((p) => p.id === id) ?? null;
+    setSelectedPersonality(personality);
+    setSubscribeModalOpen(true);
+  };
+
+  const handleSubscribeConfirm = () => {
+    if (!selectedPersonality) return;
+    setAppStore((s) => ({
+      subscribedIds: [...s.subscribedIds, selectedPersonality.id],
+    }));
+    setSubscribeModalOpen(false);
+  };
+
+  const handleSubscribeClose = () => {
+    setSubscribeModalOpen(false);
   };
 
   return (
@@ -178,7 +203,12 @@ const MarketplacePage = () => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 style={{ height: "100%" }}
               >
-                <AICard personality={personality} onDemoChat={handleDemoChat} />
+                <AICard
+                  personality={personality}
+                  onDemoChat={handleDemoChat}
+                  isSubscribed={subscribedIds.includes(personality.id)}
+                  onSubscribe={handleSubscribeClick}
+                />
               </motion.div>
             </Grid>
           ))}
@@ -199,6 +229,13 @@ const MarketplacePage = () => {
       <ChatModal
         open={chatModalOpen}
         onClose={handleCloseChat}
+        personality={selectedPersonality}
+      />
+
+      <SubscribeModal
+        open={subscribeModalOpen}
+        onClose={handleSubscribeClose}
+        onConfirm={handleSubscribeConfirm}
         personality={selectedPersonality}
       />
     </Box>

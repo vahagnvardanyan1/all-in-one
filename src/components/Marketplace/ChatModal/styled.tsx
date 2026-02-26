@@ -101,4 +101,30 @@ export const SendButton = styled(IconButton)({
     background: "linear-gradient(135deg, #6d28d9 0%, #2563eb 100%)",
     boxShadow: "0 0 20px rgba(124, 58, 237, 0.3)",
   },
+  "&.Mui-disabled": {
+    background: "rgba(124, 58, 237, 0.3)",
+    color: "rgba(255, 255, 255, 0.4)",
+  },
 });
+
+export const TypingIndicator = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: 4,
+  alignSelf: "flex-start",
+  padding: "12px 16px",
+  borderRadius: "16px 16px 16px 4px",
+  background: `linear-gradient(135deg, rgba(${theme.vars?.palette.primary.mainChannel} / 0.3) 0%, rgba(${theme.vars?.palette.primary.mainChannel} / 0.15) 100%)`,
+  "& span": {
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    backgroundColor: theme.vars?.palette.primary.light,
+    animation: "typingBounce 1.4s infinite ease-in-out",
+    "&:nth-of-type(2)": { animationDelay: "0.2s" },
+    "&:nth-of-type(3)": { animationDelay: "0.4s" },
+  },
+  "@keyframes typingBounce": {
+    "0%, 80%, 100%": { transform: "scale(0.6)", opacity: 0.4 },
+    "40%": { transform: "scale(1)", opacity: 1 },
+  },
+}));

@@ -69,6 +69,18 @@ export const SubscribeButton = styled(Button)({
   },
 });
 
+export const SubscribedButton = styled(Button)({
+  flex: 1,
+  background: "rgba(16, 185, 129, 0.15)",
+  color: "#10b981",
+  fontWeight: 600,
+  border: "1px solid rgba(16, 185, 129, 0.3)",
+  pointerEvents: "none",
+  "&:hover": {
+    background: "rgba(16, 185, 129, 0.15)",
+  },
+});
+
 export const DemoChatButton = styled(Button)(({ theme }) => ({
   flex: 1,
   borderColor: `rgba(${theme.vars?.palette.primary.mainChannel} / 0.4)`,
