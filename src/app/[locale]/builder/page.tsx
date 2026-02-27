@@ -17,11 +17,14 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
+import SaveIcon from "@mui/icons-material/Save";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 
-import { TEAM_ROLES } from "@/data/workflows";
 import { CustomNode, NodePanel } from "@/components/Builder";
+import { TEAM_ROLES } from "@/data/workflows";
+import { setAppStore } from "@/store";
 
 const initialNodes: Node[] = [
   {
@@ -218,6 +221,24 @@ const BuilderPage = () => {
     [reactFlowInstance, setNodes],
   );
 
+  const handleSaveWorkflow = useCallback(() => {
+    const workflow = {
+      id: `wf-${Date.now()}`,
+      name: `Workflow (${nodes.length} agents)`,
+      nodeCount: nodes.length,
+      createdAt: new Date().toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+    };
+    setAppStore((s) => ({
+      savedWorkflows: [...s.savedWorkflows, workflow],
+    }));
+    setSnackbarMessage("Workflow saved to Dashboard!");
+    setSnackbarOpen(true);
+  }, [nodes.length]);
+
   const handleCloseSnackbar = useCallback(() => {
     setSnackbarOpen(false);
   }, []);
@@ -271,6 +292,25 @@ const BuilderPage = () => {
           />
         </ReactFlow>
       </Box>
+
+      <Button
+        variant="contained"
+        startIcon={<SaveIcon />}
+        onClick={handleSaveWorkflow}
+        sx={{
+          position: "absolute",
+          top: 70,
+          right: 24,
+          zIndex: 10,
+          background: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
+          "&:hover": {
+            background: "linear-gradient(135deg, #6d28d9 0%, #2563eb 100%)",
+            boxShadow: "0 0 20px rgba(124, 58, 237, 0.3)",
+          },
+        }}
+      >
+        Save Workflow
+      </Button>
 
       <Snackbar
         open={snackbarOpen}

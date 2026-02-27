@@ -5,6 +5,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import GroupsIcon from "@mui/icons-material/Groups";
 import StarIcon from "@mui/icons-material/Star";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { motion } from "framer-motion";
@@ -25,9 +26,15 @@ import {
 
 interface CompanyHeaderProps {
   company: ICompany;
+  isHired?: boolean;
+  onHire?: () => void;
 }
 
-export const CompanyHeader = ({ company }: CompanyHeaderProps) => (
+export const CompanyHeader = ({
+  company,
+  isHired,
+  onHire,
+}: CompanyHeaderProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -152,9 +159,24 @@ export const CompanyHeader = ({ company }: CompanyHeaderProps) => (
           </PricingBox>
 
           <Box sx={{ mt: 2 }}>
-            <HireButton variant="contained" size="large">
-              Hire Agency
-            </HireButton>
+            {isHired ? (
+              <Button
+                variant="outlined"
+                size="large"
+                startIcon={<CheckCircleIcon />}
+                sx={{
+                  borderColor: "rgba(34, 197, 94, 0.4)",
+                  color: "#22c55e",
+                  pointerEvents: "none",
+                }}
+              >
+                Hired
+              </Button>
+            ) : (
+              <HireButton variant="contained" size="large" onClick={onHire}>
+                Hire Agency
+              </HireButton>
+            )}
           </Box>
         </Box>
       </Box>

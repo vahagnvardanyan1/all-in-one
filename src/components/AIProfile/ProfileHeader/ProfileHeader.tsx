@@ -1,5 +1,6 @@
 "use client";
 
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -13,9 +14,15 @@ import type { IPersonality } from "@/data/personalities";
 
 interface ProfileHeaderProps {
   personality: IPersonality;
+  isSubscribed?: boolean;
+  onSubscribe?: () => void;
 }
 
-export const ProfileHeader = ({ personality }: ProfileHeaderProps) => (
+export const ProfileHeader = ({
+  personality,
+  isSubscribed,
+  onSubscribe,
+}: ProfileHeaderProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -97,20 +104,37 @@ export const ProfileHeader = ({ personality }: ProfileHeaderProps) => (
             /mo
           </Typography>
         </Typography>
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            background: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
-            py: 1.25,
-            "&:hover": {
-              background: "linear-gradient(135deg, #6d28d9 0%, #2563eb 100%)",
-              boxShadow: "0 0 30px rgba(124, 58, 237, 0.4)",
-            },
-          }}
-        >
-          Subscribe
-        </Button>
+        {isSubscribed ? (
+          <Button
+            variant="outlined"
+            fullWidth
+            startIcon={<CheckCircleIcon />}
+            sx={{
+              borderColor: "rgba(34, 197, 94, 0.4)",
+              color: "#22c55e",
+              pointerEvents: "none",
+              py: 1.25,
+            }}
+          >
+            Subscribed
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={onSubscribe}
+            sx={{
+              background: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
+              py: 1.25,
+              "&:hover": {
+                background: "linear-gradient(135deg, #6d28d9 0%, #2563eb 100%)",
+                boxShadow: "0 0 30px rgba(124, 58, 237, 0.4)",
+              },
+            }}
+          >
+            Subscribe
+          </Button>
+        )}
       </Stack>
     </Box>
   </motion.div>

@@ -4,6 +4,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import GroupsIcon from "@mui/icons-material/Groups";
 import StarIcon from "@mui/icons-material/Star";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { motion } from "framer-motion";
@@ -24,9 +25,11 @@ import {
 
 interface CompanyCardProps {
   company: ICompany;
+  isHired?: boolean;
+  onHire?: (id: string) => void;
 }
 
-export const CompanyCard = ({ company }: CompanyCardProps) => (
+export const CompanyCard = ({ company, isHired, onHire }: CompanyCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -114,9 +117,30 @@ export const CompanyCard = ({ company }: CompanyCardProps) => (
       </Typography>
 
       <Stack direction="row" spacing={1.5} sx={{ mt: "auto" }}>
-        <HireButton variant="contained" size="small" sx={{ flex: 1 }}>
-          Hire Agency
-        </HireButton>
+        {isHired ? (
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{
+              flex: 1,
+              borderColor: "rgba(34, 197, 94, 0.4)",
+              color: "#22c55e",
+              pointerEvents: "none",
+            }}
+            startIcon={<CheckCircleIcon sx={{ fontSize: 16 }} />}
+          >
+            Hired
+          </Button>
+        ) : (
+          <HireButton
+            variant="contained"
+            size="small"
+            sx={{ flex: 1 }}
+            onClick={() => onHire?.(company.id)}
+          >
+            Hire Agency
+          </HireButton>
+        )}
         <DetailsButton
           variant="outlined"
           size="small"

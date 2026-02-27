@@ -10,11 +10,20 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { motion } from "framer-motion";
 
-import { CompanyCard } from "@/components/Companies";
+import { CompanyCard, HireModal } from "@/components/Companies";
 import { AI_COMPANIES, COMPANY_CATEGORIES } from "@/data/companies";
+import type { ICompany } from "@/data/companies";
+import { useAppStore, setAppStore } from "@/store";
+import type { IAppStore } from "@/store";
+
+const hiredSelector = (s: IAppStore) => s.hiredCompanyIds;
 
 const CompaniesPage = () => {
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [hireModalOpen, setHireModalOpen] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState<ICompany | null>(null);
+
+  const hiredCompanyIds = useAppStore(hiredSelector);
 
   const filteredCompanies =
     activeCategory === "All"
@@ -23,6 +32,24 @@ const CompaniesPage = () => {
 
   const handleCategoryClick = (category: string) => {
     setActiveCategory(category);
+  };
+
+  const handleHireClick = (id: string) => {
+    const company = AI_COMPANIES.find((c) => c.id === id) ?? null;
+    setSelectedCompany(company);
+    setHireModalOpen(true);
+  };
+
+  const handleHireConfirm = () => {
+    if (!selectedCompany) return;
+    setAppStore((s) => ({
+      hiredCompanyIds: [...s.hiredCompanyIds, selectedCompany.id],
+    }));
+    setHireModalOpen(false);
+  };
+
+  const handleHireClose = () => {
+    setHireModalOpen(false);
   };
 
   return (
@@ -92,7 +119,11 @@ const CompaniesPage = () => {
         <Grid container spacing={3}>
           {filteredCompanies.map((company) => (
             <Grid size={{ xs: 12, md: 6, lg: 4 }} key={company.id}>
-              <CompanyCard company={company} />
+              <CompanyCard
+                company={company}
+                isHired={hiredCompanyIds.includes(company.id)}
+                onHire={handleHireClick}
+              />
             </Grid>
           ))}
         </Grid>
@@ -107,6 +138,13 @@ const CompaniesPage = () => {
           </Typography>
         )}
       </Container>
+
+      <HireModal
+        open={hireModalOpen}
+        onClose={handleHireClose}
+        onConfirm={handleHireConfirm}
+        company={selectedCompany}
+      />
     </Box>
   );
 };

@@ -9,10 +9,11 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { CompanyHeader } from "@/components/Companies/CompanyHeader";
-import { EmployeeCard } from "@/components/Companies/EmployeeCard";
+import { CompanyHeader, EmployeeCard, HireModal } from "@/components/Companies";
 import { AI_COMPANIES } from "@/data/companies";
 import { Link } from "@/i18n/navigation";
+import { useAppStore, setAppStore } from "@/store";
+import type { IAppStore } from "@/store";
 
 interface CompanyDetailPageProps {
   params: Promise<{ id: string }>;
@@ -20,22 +21,36 @@ interface CompanyDetailPageProps {
 
 const ALL_DEPARTMENTS = "All";
 
+const hiredSelector = (s: IAppStore) => s.hiredCompanyIds;
+
 const CompanyDetailPage = ({ params }: CompanyDetailPageProps) => {
   const { id } = use(params);
   const company = AI_COMPANIES.find((c) => c.id === id);
   const [activeDepartment, setActiveDepartment] = useState(ALL_DEPARTMENTS);
+  const [hireModalOpen, setHireModalOpen] = useState(false);
+
+  const hiredCompanyIds = useAppStore(hiredSelector);
+  const isHired = company ? hiredCompanyIds.includes(company.id) : false;
 
   const departments = useMemo(() => {
     if (!company?.employees) return [ALL_DEPARTMENTS];
     const unique = [...new Set(company.employees.map((e) => e.department))];
     return [ALL_DEPARTMENTS, ...unique];
-  }, [company?.employees]);
+  }, [company]);
 
   const filteredEmployees = useMemo(() => {
     if (!company?.employees) return [];
     if (activeDepartment === ALL_DEPARTMENTS) return company.employees;
     return company.employees.filter((e) => e.department === activeDepartment);
-  }, [company?.employees, activeDepartment]);
+  }, [company, activeDepartment]);
+
+  const handleHireConfirm = () => {
+    if (!company) return;
+    setAppStore((s) => ({
+      hiredCompanyIds: [...s.hiredCompanyIds, company.id],
+    }));
+    setHireModalOpen(false);
+  };
 
   if (!company) {
     return (
@@ -64,7 +79,11 @@ const CompanyDetailPage = ({ params }: CompanyDetailPageProps) => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
-      <CompanyHeader company={company} />
+      <CompanyHeader
+        company={company}
+        isHired={isHired}
+        onHire={() => setHireModalOpen(true)}
+      />
 
       {company.employees && company.employees.length > 0 && (
         <Box sx={{ mt: 6 }}>
@@ -160,6 +179,13 @@ const CompanyDetailPage = ({ params }: CompanyDetailPageProps) => {
           </AnimatePresence>
         </Box>
       )}
+
+      <HireModal
+        open={hireModalOpen}
+        onClose={() => setHireModalOpen(false)}
+        onConfirm={handleHireConfirm}
+        company={company}
+      />
     </Container>
   );
 };

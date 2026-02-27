@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -8,16 +8,35 @@ import Typography from "@mui/material/Typography";
 
 import { ProfileHeader } from "@/components/AIProfile/ProfileHeader";
 import { ProfileTabs } from "@/components/AIProfile/ProfileTabs";
+import { SubscribeModal } from "@/components/Marketplace";
 import { AI_PERSONALITIES } from "@/data/personalities";
 import { Link } from "@/i18n/navigation";
+import { useAppStore, setAppStore } from "@/store";
+import type { IAppStore } from "@/store";
 
 interface AIProfilePageProps {
   params: Promise<{ id: string }>;
 }
 
+const subscribedSelector = (s: IAppStore) => s.subscribedIds;
+
 const AIProfilePage = ({ params }: AIProfilePageProps) => {
   const { id } = use(params);
   const personality = AI_PERSONALITIES.find((p) => p.id === id);
+  const [subscribeModalOpen, setSubscribeModalOpen] = useState(false);
+
+  const subscribedIds = useAppStore(subscribedSelector);
+  const isSubscribed = personality
+    ? subscribedIds.includes(personality.id)
+    : false;
+
+  const handleSubscribeConfirm = () => {
+    if (!personality) return;
+    setAppStore((s) => ({
+      subscribedIds: [...s.subscribedIds, personality.id],
+    }));
+    setSubscribeModalOpen(false);
+  };
 
   if (!personality) {
     return (
@@ -46,8 +65,19 @@ const AIProfilePage = ({ params }: AIProfilePageProps) => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
-      <ProfileHeader personality={personality} />
+      <ProfileHeader
+        personality={personality}
+        isSubscribed={isSubscribed}
+        onSubscribe={() => setSubscribeModalOpen(true)}
+      />
       <ProfileTabs personality={personality} />
+
+      <SubscribeModal
+        open={subscribeModalOpen}
+        onClose={() => setSubscribeModalOpen(false)}
+        onConfirm={handleSubscribeConfirm}
+        personality={personality}
+      />
     </Container>
   );
 };

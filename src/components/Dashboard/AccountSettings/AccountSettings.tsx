@@ -10,15 +10,23 @@ import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import { motion } from "framer-motion";
 
+import { useAppStore } from "@/store";
+import type { IAppStore } from "@/store";
+
 import { SectionTitle, GlowCard, SectionWrapper } from "../shared";
 
-const SETTINGS_ROWS = [
-  { label: "Name", value: "John Doe" },
-  { label: "Email", value: "john@example.com" },
-];
+const selector = (s: IAppStore) => ({
+  userName: s.userName,
+  userEmail: s.userEmail,
+  isLoggedIn: s.isLoggedIn,
+});
 
 export const AccountSettings = () => {
   const { mode, setMode } = useColorScheme();
+  const { userName, userEmail, isLoggedIn } = useAppStore(selector);
+
+  const displayName = isLoggedIn ? userName : "Guest";
+  const displayEmail = isLoggedIn ? userEmail : "Not signed in";
 
   return (
     <SectionWrapper>
@@ -32,21 +40,31 @@ export const AccountSettings = () => {
       >
         <GlowCard>
           <Stack spacing={3}>
-            {SETTINGS_ROWS.map((row) => (
-              <Stack
-                key={row.label}
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  {row.label}
-                </Typography>
-                <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                  {row.value}
-                </Typography>
-              </Stack>
-            ))}
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Name
+              </Typography>
+              <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                {displayName}
+              </Typography>
+            </Stack>
+
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Email
+              </Typography>
+              <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                {displayEmail}
+              </Typography>
+            </Stack>
 
             <Stack
               direction="row"

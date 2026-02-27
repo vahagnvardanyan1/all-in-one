@@ -1,10 +1,12 @@
 "use client";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import GroupIcon from "@mui/icons-material/Group";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import TimerIcon from "@mui/icons-material/Timer";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
@@ -20,9 +22,15 @@ import { HeaderAvatar, EnrollButton } from "./styled";
 
 interface CourseHeaderProps {
   course: ICourse;
+  isEnrolled?: boolean;
+  onEnroll?: () => void;
 }
 
-export const CourseHeader = ({ course }: CourseHeaderProps) => {
+export const CourseHeader = ({
+  course,
+  isEnrolled,
+  onEnroll,
+}: CourseHeaderProps) => {
   const instructor = getInstructorById(course.instructorId);
 
   return (
@@ -148,9 +156,25 @@ export const CourseHeader = ({ course }: CourseHeaderProps) => {
           <Typography variant="h4" sx={{ fontWeight: 800 }}>
             ${course.price}
           </Typography>
-          <EnrollButton variant="contained" fullWidth>
-            Enroll Now
-          </EnrollButton>
+          {isEnrolled ? (
+            <Button
+              variant="outlined"
+              fullWidth
+              startIcon={<CheckCircleIcon />}
+              sx={{
+                borderColor: "rgba(34, 197, 94, 0.4)",
+                color: "#22c55e",
+                pointerEvents: "none",
+                py: 1.25,
+              }}
+            >
+              Enrolled
+            </Button>
+          ) : (
+            <EnrollButton variant="contained" fullWidth onClick={onEnroll}>
+              Enroll Now
+            </EnrollButton>
+          )}
           <Typography
             variant="caption"
             sx={{ color: "text.secondary", textAlign: "center" }}
