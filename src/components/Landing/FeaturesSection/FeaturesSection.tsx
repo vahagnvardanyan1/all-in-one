@@ -3,6 +3,7 @@
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import BusinessIcon from "@mui/icons-material/Business";
 import BuildIcon from "@mui/icons-material/Build";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -28,6 +29,12 @@ const features = [
     title: "AI Builder",
     description:
       "Create custom AI workflows with our visual builder. No coding required. Design, deploy, and monetize your own AI solutions.",
+  },
+  {
+    icon: <MusicNoteIcon sx={{ fontSize: 28, color: "#fff" }} />,
+    title: "Generate Dadada",
+    description:
+      "Experience the magic of AI-generated music with our 'Generate Dadada' feature. Create unique soundscapes effortlessly.",
   },
 ];
 
