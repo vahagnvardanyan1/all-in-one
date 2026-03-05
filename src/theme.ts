@@ -6,7 +6,7 @@ const theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "data-color-scheme",
   },
-  defaultColorScheme: "dark",
+  defaultColorScheme: "light", // Changed from "dark" to "light" for initial load
   colorSchemes: {
     dark: {
       palette: {
