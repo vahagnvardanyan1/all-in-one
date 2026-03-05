@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Switch from "@mui/material/Switch";
 
 import { Link } from "@/i18n/navigation";
 import type { IAppStore } from "@/store";
@@ -15,13 +16,19 @@ import { useAppStore, setAppStore } from "@/store";
 import { HeaderBar, BrandText } from "./styled";
 
 const sidebarSelector = (store: IAppStore) => store.sidebarOpen;
+const themeSelector = (store: IAppStore) => store.theme;
 
 const toggleSidebar = () => {
   setAppStore((s) => ({ sidebarOpen: !s.sidebarOpen }));
 };
 
+const toggleTheme = () => {
+  setAppStore((s) => ({ theme: s.theme === "light" ? "dark" : "light" }));
+};
+
 export const Header = () => {
   const sidebarOpen = useAppStore(sidebarSelector);
+  const currentTheme = useAppStore(themeSelector);
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -59,6 +66,12 @@ export const Header = () => {
             gap: 1,
           }}
         >
+          <Switch
+            checked={currentTheme === "dark"}
+            onChange={toggleTheme}
+            color="default"
+            inputProps={{ "aria-label": "toggle theme" }}
+          />
           <Button
             component={Link}
             href="/login"

@@ -104,37 +104,14 @@ export const ProfileHeader = ({
             /mo
           </Typography>
         </Typography>
-        {isSubscribed ? (
-          <Button
-            variant="outlined"
-            fullWidth
-            startIcon={<CheckCircleIcon />}
-            sx={{
-              borderColor: "rgba(34, 197, 94, 0.4)",
-              color: "#22c55e",
-              pointerEvents: "none",
-              py: 1.25,
-            }}
-          >
-            Subscribed
-          </Button>
-        ) : (
-          <Button
-            variant="contained"
-            fullWidth
-            onClick={onSubscribe}
-            sx={{
-              background: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
-              py: 1.25,
-              "&:hover": {
-                background: "linear-gradient(135deg, #6d28d9 0%, #2563eb 100%)",
-                boxShadow: "0 0 30px rgba(124, 58, 237, 0.4)",
-              },
-            }}
-          >
-            Subscribe
-          </Button>
-        )}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={onSubscribe}
+          disabled={isSubscribed}
+        >
+          {isSubscribed ? "Subscribed" : "Subscribe"}
+        </Button>
       </Stack>
     </Box>
   </motion.div>
