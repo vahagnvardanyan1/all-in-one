@@ -10,7 +10,7 @@ export const HeaderBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "sidebarOpen" && prop !== "isDesktop",
 })<{ sidebarOpen?: boolean; isDesktop?: boolean }>(
   ({ sidebarOpen, isDesktop, theme }) => ({
-    backgroundColor: `rgba(${theme.vars?.palette.background.defaultChannel} / 0.8)`,
+    backgroundColor: `rgba(${theme.vars?.palette.primary.mainChannel} / 0.8)`, // Changed to the new color
     backdropFilter: "blur(20px)",
     borderBottom: `1px solid ${theme.vars?.palette.divider}`,
     boxShadow: "none",
